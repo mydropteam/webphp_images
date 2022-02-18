@@ -39,7 +39,7 @@ ADD ./server.conf /etc/nginx/nginx.conf
 
 RUN chown -R www-data:www-data $HOME/.composer/
 
-USER www-data
+#USER www-data
 WORKDIR /var/www/html
 
 COPY ./supervisord.conf /etc/supervisord.conf
