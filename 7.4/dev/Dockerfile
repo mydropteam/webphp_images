@@ -1,4 +1,4 @@
-FROM pdropteam/web-php:7.4-prod
+FROM dropteam/web-php:7.4-prod
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
