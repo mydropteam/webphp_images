@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y --fix-missing \
     libpq-dev \
     libssl-dev \
     nginx \
+    sendmail \
     supervisor && \
     rm -r /var/lib/apt/lists/*
 
@@ -30,12 +31,15 @@ RUN docker-php-ext-install \
     gd \
     opcache \
     zip \
-    intl
+    intl \
+    simplexml
 
 RUN cd /usr/src && \
     curl -sS http://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 ADD ./server.conf /etc/nginx/nginx.conf
+COPY ./php-fpm.conf /usr/local/etc/php-fpm.conf
+COPY ./www.conf /usr/local/etc/php-fpm.d/www.conf
 
 RUN chown -R www-data:www-data $HOME/.composer/
 
