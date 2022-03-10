@@ -37,9 +37,12 @@ RUN docker-php-ext-install \
 RUN cd /usr/src && \
     curl -sS http://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
 ADD ./server.conf /etc/nginx/nginx.conf
 COPY ./php-fpm.conf /usr/local/etc/php-fpm.conf
 COPY ./www.conf /usr/local/etc/php-fpm.d/www.conf
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 RUN chown -R www-data:www-data $HOME/.composer/
 
